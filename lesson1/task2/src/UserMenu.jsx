@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { UserContext } from './user-context';
+import React from 'react';
+import { UserDataContext } from './user-context';
 
-class UserMenu extends Component {
+class UserMenu extends React.Component {
   render() {
     return (
       <div className="menu">
@@ -12,7 +12,6 @@ class UserMenu extends Component {
   }
 }
 
-// Зв'язую контекст
-UserMenu.contextType = UserContext;
+UserMenu.contextType = UserDataContext;
 
 export default UserMenu;
