@@ -1,43 +1,32 @@
-import { ADD_USER, DELETE_USER, UPDATE_USER } from './users.actions';
+import { createStore } from 'redux';
 
-const initalState = {
-  usersList: [],
+const INCREMENT = 'COUNTER/INCREMENT';
+const DECREMENT = 'COUNTER/DECREMENT';
+
+export const increment = () => {
+  return {
+    type: INCREMENT,
+  };
 };
 
-const usersReducer = (state = initalState, action) => {
+export const decrement = () => {
+  return {
+    type: DECREMENT,
+  };
+};
+
+const counterREducer = (state = 0, action) => {
   switch (action.type) {
-    case ADD_USER: {
-      return {
-        ...state,
-        usersList: state.usersList.concat(action.payload.userData),
-      };
-    }
-    case DELETE_USER: {
-      const newList = state.usersList.filter(user => user.id !== action.payload.userId);
-      return {
-        ...state,
-        usersList: newList,
-      };
-    }
-    case UPDATE_USER: {
-      const newList = state.usersList.map(user => {
-        if (user.id === action.payload.userId) {
-          return {
-            ...user,
-            ...action.payload.userData,
-          };
-          b;
-        }
-        return user;
-      });
-      return {
-        ...state,
-        usersList: newList,
-      };
-    }
+    case INCREMENT:
+      return state + 1;
+    case DECREMENT:
+      return state - 1;
     default:
       return state;
   }
 };
 
-export default usersReducer;
+export const store = createStore(
+  counterREducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
